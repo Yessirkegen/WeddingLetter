@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Тойға шақыру</title>
+  <style>
+    /* Базовые стили */
+    * { box-sizing: border-box; margin:0; padding:0; }
+    body { font-family: sans-serif; color:#333; line-height:1.4; }
+    h1,h2,h3,h4 { text-align:center; margin:0.5em 0; }
+    p { margin:0.5em 0; }
+    a { text-decoration:none; color:inherit; }
+    button { cursor:pointer; }
+
+    /* Hero */
+    .hero {
+      position:relative; height:60vh;
+      background:url('https://source.unsplash.com/random/1200x800?wedding')center/cover no-repeat;
+    }
+    .overlay {
+      position:absolute; inset:0;
+      background:rgba(0,0,0,0.4);
+      display:flex;flex-direction:column;
+      justify-content:center;align-items:center;
+      color:#fff; text-align:center; padding:1em;
+    }
+    .overlay h1 { font-size:2.5em; text-shadow:0 2px 6px rgba(0,0,0,0.7); }
+    .overlay p { font-size:1.2em; margin-bottom:1em; }
+    .btn-play {
+      display:inline-flex;align-items:center;gap:0.5em;
+      background:#20741D;color:#fff;border:none;
+      border-radius:50px;padding:0.8em 1.5em;
+      font-size:1.1em;
+    }
+    .btn-play svg { width:1em;height:1em;fill:currentColor; }
+
+    /* Event card */
+    .event-card {
+      max-width:400px;margin:2em auto;
+      border-radius:12px;overflow:hidden;
+      box-shadow:0 4px 15px rgba(0,0,0,0.1);
+      background:#fff;
+    }
+    .event-card img { width:100%;display:block; }
+    .card-body { padding:1.5em; text-align:center; }
+    .card-body h2 { margin-bottom:0.5em; }
+    .card-body p { margin:0.5em 0; color:#555; }
+    .card-body strong { color:#20741D; }
+    .countdown {
+      display:flex;justify-content:center;gap:0.5em;margin:0.5em 0;
+    }
+    .countdown div {
+      width:60px;height:60px;border:2px solid #20741D;
+      border-radius:50%;display:flex;
+      flex-direction:column;justify-content:center;align-items:center;
+    }
+    .countdown span { color:#20741D;font-size:1.2em; }
+    .countdown small { color:#20741D;font-size:0.7em; }
+    .buttons { display:flex;justify-content:center;gap:0.5em;flex-wrap:wrap;margin-top:1em; }
+    .btn { display:inline-flex;align-items:center;gap:0.4em;padding:0.6em 1em;border-radius:6px;font-size:0.95em; }
+    .map-btn { background:#20741D;color:#fff;border:none; }
+    .audio-btn { background:#fff;color:#20741D;border:2px solid #20741D; }
+    .map-btn:hover { background:#2a8e33; }
+    .audio-btn:hover { background:#f0fff0; }
+
+    /* Photo album (статично) */
+    .photo-album { max-width:600px;margin:2em auto;text-align:center; }
+    .photo-album h2 { margin-bottom:1em; }
+    .photos {
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+      gap:10px;
+    }
+    .photos img {
+      width:100%;border-radius:8px;
+      object-fit:cover;height:100px;
+    }
+
+    /* Owners */
+    .owners-section { text-align:center; margin:2em auto; }
+    .owners-list {
+      display:flex;justify-content:center;gap:2em;flex-wrap:wrap;
+    }
+    .owner {
+      display:flex;flex-direction:column;align-items:center;
+    }
+    .owner-img {
+      width:150px;height:150px;border-radius:50%;
+      background:#eee;object-fit:cover;
+    }
+    .owner-name { margin-top:0.5em;font-size:1.1em; }
+    .insta-btn {
+      display:inline-flex;align-items:center;gap:0.4em;
+      margin-top:0.3em;padding:0.4em 0.8em;
+      border:1px solid #e1306c;border-radius:6px;
+      color:#e1306c;background:#fff;
+    }
+    .insta-btn:hover { background:rgba(225,48,108,0.1); }
+    .insta-btn svg { width:1em;height:1em;fill:currentColor; }
+    .owners-note { color:#20741D; margin-top:1em; }
+
+    /* RSVP form */
+    form { max-width:400px;margin:2em auto;display:flex;flex-direction:column;gap:1em; }
+    .radios label { display:flex;align-items:center;gap:0.5em; }
+    input,textarea,button { padding:10px;font-size:1em;border:1px solid #20741D;border-radius:4px; }
+    textarea { resize:vertical; }
+    button { background:#20741D;color:#fff;border:none; }
+
+    /* Wishes slider */
+    .wishes { max-width:400px;margin:2em auto;text-align:center; }
+    .wishes h2 { margin-bottom:1em; }
+    .slides, .dots { margin-top:1em; }
+    .slide { display:none; padding:1em; }
+    .slide.active { display:block; }
+    .dots { display:flex;justify-content:center;gap:8px; }
+    .dot {
+      width:12px;height:12px;border:2px solid #20741D;
+      border-radius:50%;cursor:pointer;
+    }
+    .dot.active { background:#20741D; }
+    .arrows { display:flex;justify-content:center;gap:1em;margin-top:1em; }
+    .arrows button {
+      background:none;border:2px solid #20741D;padding:0.3em 0.6em;border-radius:4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="overlay">
+      <h1>Құрметті қонақтар!</h1>
+      <p>Ұлымыз Жасұлан мен келініміз Гүлденнің тойына шақырамыз.</p>
+      <button class="btn-play" id="btnHero">
+        <svg viewBox="0 0 64 64"><path d="M16 12v40l36-20z"/></svg> Әуен қосу
+      </button>
+    </div>
+  </div>
+
+  <!-- Event card -->
+  <section class="event-card">
+    <img src="https://source.unsplash.com/random/400x200?flowers" alt="">
+    <div class="card-body">
+      <h2>Той жайлы</h2>
+      <p>Той иелері: <strong>Ерболат – Айнұр</strong></p>
+      <hr>
+      <p>Тойдың басталу уақыты:<br><strong>22.06.2025 / сағат 12:00</strong></p>
+      <p>Тойдың басталуына қалды:</p>
+      <div class="countdown">
+        <div><span id="days">--</span><small>күн</small></div>
+        <div><span id="hours">--</span><small>сағат</small></div>
+        <div><span id="minutes">--</span><small>минут</small></div>
+        <div><span id="seconds">--</span><small>секунд</small></div>
+      </div>
+      <hr>
+      <p>Тойдың мекен-жайы:<br>Рыскулова көшесі 57а/1, Ақтөбе<br><strong>"Гаухар" мейрамханасы</strong></p>
+      <div class="buttons">
+        <a href="https://2gis.kz/aktobe/geo/70000001032399700/57.131611,50.313008"
+           target="_blank" class="btn map-btn">Карта арқылы ашу</a>
+        <button class="btn audio-btn" id="btnCard">
+          <svg viewBox="0 0 64 64"><path d="M16 12v40l36-20z"/></svg> Әуен қосу
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo album -->
+  <section class="photo-album">
+    <h2>Фотоальбом</h2>
+    <div class="photos">
+      <img src="https://via.placeholder.com/300x200?text=1" alt="">
+      <img src="https://via.placeholder.com/300x200?text=2" alt="">
+      <img src="https://via.placeholder.com/300x200?text=3" alt="">
+      <img src="https://via.placeholder.com/300x200?text=4" alt="">
+    </div>
+  </section>
+
+  <!-- Owners -->
+  <section class="owners-section">
+    <h2>Құрметпен</h2>
+    <div class="owners-list">
+      <div class="owner">
+        <img src="https://via.placeholder.com/150" alt="Жасұлан" class="owner-img">
+        <div class="owner-name">Жасұлан</div>
+        <a href="https://instagram.com/your_insta" target="_blank" class="insta-btn">
+          <svg viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5z"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r="1.25"/></svg>
+          @your_insta
+        </a>
+      </div>
+      <div class="owner">
+        <img src="https://via.placeholder.com/150" alt="Гүлден" class="owner-img">
+        <div class="owner-name">Гүлден</div>
+        <a href="https://instagram.com/your_insta" target="_blank" class="insta-btn">
+          <svg viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5z"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r="1.25"/></svg>
+          @your_insta
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <h2>Тойға келетіндігіңізді растаңыз:</h2>
+  <form id="rsvp-form">
+    <div class="radios">
+      <label><input type="radio" name="response" value="Иә, өзім барамын!" checked> Иә, өзім барамын!</label>
+      <label><input type="radio" name="response" value="Жұбайыммен бірге барамын"> Жұбайыммен бірге барамын</label>
+      <label><input type="radio" name="response" value="Өкінішке орай, келе алмаймын"> Өкінішке орай, келе алмаймын</label>
+    </div>
+    <input type="text" name="name" placeholder="Аты-жөніңіз" required>
+    <textarea name="message" rows="4" placeholder="Той иелеріне тілегіңіз" required></textarea>
+    <button type="submit">Жіберу</button>
+  </form>
+
+  <!-- Wishes slider -->
+  <div class="wishes">
+    <h2>Ізгі тілектер:</h2>
+    <div class="arrows">
+      <button id="prevWish">&lt; Алға</button>
+      <button id="nextWish">Артқа &gt;</button>
+    </div>
+    <div class="slides"></div>
+    <div class="dots"></div>
+  </div>
+
+  <!-- Firebase + JS -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js';
+    import {
+      getFirestore, collection, addDoc, getDocs,
+      query, orderBy, serverTimestamp
+    } from 'https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js';
+
+    // Firebase config
+    const cfg = {
+      apiKey: "AIzaSyC9vMqxWup-XCbQAno0tij_anivznTJx3E",
+      authDomain: "zhasiktoi.firebaseapp.com",
+      projectId: "zhasiktoi",
+      storageBucket: "zhasiktoi.appspot.com",
+      messagingSenderId: "661605942620",
+      appId: "1:661605942620:web:a7b3ee50fd0701be736d99"
+    };
+    const app = initializeApp(cfg);
+    const db  = getFirestore(app);
+    const col = collection(db,'wishes');
+
+    // Countdown
+    (()=>{
+      const dl=new Date(2025,5,22,12,0);
+      const ids=['days','hours','minutes','seconds'].map(i=>document.getElementById(i));
+      function upd(){
+        const diff=dl-new Date();
+        if(diff<0)return clearInterval(iid);
+        const d=Math.floor(diff/864e5),
+              h=Math.floor(diff/36e5)%24,
+              m=Math.floor(diff/6e4)%60,
+              s=Math.floor(diff/1e3)%60;
+        [d,h,m,s].forEach((v,i)=>ids[i].textContent=String(v).padStart(2,'0'));
+      }
+      upd();var iid=setInterval(upd,1e3);
+    })();
+
+    // Audio
+    const player=new Audio('https://cdn.pixabay.com/download/audio/2022/02/01/audio_3c5f6eb9b2.mp3?filename=romantic-piano-110647.mp3');
+    let playing=false;
+    document.querySelectorAll('#btnHero,#btnCard').forEach(b=>{
+      b.addEventListener('click',()=>{
+        playing?player.pause():player.play();
+        playing=!playing;
+        b.innerHTML = playing
+          ? '<svg viewBox="0 0 64 64"><path d="M16 12h12v40H16zm20 0h12v40H36z"/></svg> Әуен өшіру'
+          : '<svg viewBox="0 0 64 64"><path d="M16 12v40l36-20z"/></svg> Әуен қосу';
+      });
+    });
+
+    // RSVP
+    document.getElementById('rsvp-form').addEventListener('submit',async e=>{
+      e.preventDefault();
+      const fm=e.target;
+      const resp=fm.response.value,
+            name=fm.name.value.trim(),
+            msg=fm.message.value.trim();
+      if(!name||!msg)return;
+      await addDoc(col,{response:resp,name,msg,created:serverTimestamp()});
+      fm.reset();loadWishes();
+    });
+
+    // Wishes slider
+    let items=[],ci=0;
+    const slidesEl=document.querySelector('.wishes .slides');
+    const dotsEl  =document.querySelector('.wishes .dots');
+    async function loadWishes(){
+      const q=query(col,orderBy('created','desc'));
+      const s=await getDocs(q);
+      items=s.docs.map(d=>({...d.data(),date:new Date(d.data().created.seconds*1e3).toLocaleString('kk-KZ')}));
+      build();
+    }
+    function build(){
+      slidesEl.innerHTML='';dotsEl.innerHTML='';
+      items.forEach((it,i)=>{
+        const sl=document.createElement('div');
+        sl.className='slide'+(i===0?' active':'');
+        sl.innerHTML=`<h4>${it.name} → ${it.response}</h4><p>${it.msg}</p><small>${it.date}</small>`;
+        slidesEl.append(sl);
+        const dt=document.createElement('span');
+        dt.className='dot'+(i===0?' active':'');
+        dt.onclick=()=>show(i);
+        dotsEl.append(dt);
+      });
+      ci=0;
+    }
+    function show(n){
+      const sls=document.querySelectorAll('.wishes .slide');
+      const dts=document.querySelectorAll('.wishes .dot');
+      sls.forEach(s=>s.classList.remove('active'));
+      dts.forEach(d=>d.classList.remove('active'));
+      sls[n].classList.add('active');
+      dts[n].classList.add('active');
+      ci=n;
+    }
+    document.getElementById('prevWish').onclick=()=>show((ci-1+items.length)%items.length);
+    document.getElementById('nextWish').onclick=()=>show((ci+1)%items.length);
+    loadWishes();
+  </script>
+</body>
+</html>
