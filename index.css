@@ -108,7 +108,7 @@ h1, h2, h3 {
 
 .card {
     text-align: center;
-    width: 90%;
+    width: 100%;
     max-width: 400px;
     min-height: auto;
     margin: auto;       /* центруем и даём вертикальные отступы */
@@ -214,16 +214,18 @@ button { background:#20741D;color:#fff;border:none; }
     transition: 0.3s ease;
 }
 .wishes .dot.active { background:#20741D; }
-.wishes .arrows { display:flex;justify-content:center;gap:1em;margin-top:1em; }
-.wishes .arrows button {
-    background:none;
-    border:2px solid #20741D;
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
-    font-size: 0.9rem;
-    transition: ease 0.3s, color 0.3s;
+.arrows {
+  display: flex;
+  justify-content: space-between;
 }
-.wishes .arrows button:hover {
+.arrows .btn {
+  border:2px solid #20741D;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: ease 0.3s, color 0.3s;
+}
+.arrows .btn:hover {
   background: #20741D;
   color: #fff;
 }
@@ -260,15 +262,9 @@ button { background:#20741D;color:#fff;border:none; }
 }
 
 @media (max-width: 360px) {
-  .card {
-    width: 95%;  /* чуть больше «флюида» */
-  }
+
   .card-body {
     padding-bottom: 4rem;
     padding-top: 2rem;
-  }
-  .card-body::after {
-    width: 90%;
-    padding-bottom: 45%;
   }
 }
