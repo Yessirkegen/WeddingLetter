@@ -29,8 +29,8 @@
 
   <main class="container">
     <!-- Event card -->
-    <section class="card">
-      <img src="./public/flowers_top.png" width="200" class="m-auto">
+    <section class="card rounded-5">
+      <img src="./public/flowers_top.png" class="w-50 mx-auto">
       <div class="card-body">
         <h2>Той жайлы</h2>
         <p>Той иелері: <strong>Ерболат – Айнұр</strong></p>
@@ -58,7 +58,7 @@
             </button>
         </div>
       </div>
-      <img src="./public/flowers_bottom.png">
+      <img src="./public/flowers_bottom.png" class="w-100 m-auto mb-3">
     </section>
 
     <!-- Photo album -->
@@ -72,7 +72,7 @@
         <div class="owner">
           <img src="./public/insta_ava_1.jpg" alt="Жасұлан" class="owner-img">
           <div class="owner-name">Жасұлан</div>
-          <a href="https://instagram.com/your_insta" target="_blank" class="insta-btn">
+          <a href="https://instagram.com/your_insta" target="_blank" class="insta-btn rounded-3">
             <svg viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5z"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r="1.25"/></svg>
             @your_insta
           </a>
@@ -80,7 +80,7 @@
         <div class="owner">
           <img src="./public/insta_ava_1.jpg" alt="Гүлден" class="owner-img">
           <div class="owner-name">Гүлден</div>
-          <a href="https://instagram.com/your_insta" target="_blank" class="insta-btn">
+          <a href="https://instagram.com/your_insta" target="_blank" class="insta-btn rounded-3">
             <svg viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5z"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.5" cy="6.5" r="1.25"/></svg>
             @your_insta
           </a>
@@ -96,19 +96,21 @@
         <label><input type="radio" name="response" value="Жұбайыммен бірге барамын"> Жұбайыммен бірге барамын</label>
         <label><input type="radio" name="response" value="Өкінішке орай, келе алмаймын"> Өкінішке орай, келе алмаймын</label>
       </div>
-      <input type="text" name="name" placeholder="Аты-жөніңіз" required>
-      <textarea name="message" rows="4" placeholder="Той иелеріне тілегіңіз" required></textarea>
-      <button class="btn btn-success justify-content-center" type="submit">Жіберу</button>
+      <input class="rounded-3" type="text" name="name" placeholder="Аты-жөніңіз" required>
+      <textarea class="rounded-3" name="message" rows="4" placeholder="Той иелеріне тілегіңіз" required></textarea>
+      <button class="btn btn-success justify-content-center rounded-3" type="submit">Жіберу</button>
     </form>
 
     <!-- Wishes slider -->
-    <div class="wishes">
-      <div class="arrows">
-        <button class="btn btn-sm rounded-5 btn-outline-success mb-4" id="prevWish">&lt;</button>
-        <h2>Ізгі тілектер:</h2>
-        <button class="btn btn-sm rounded-5 btn-outline-success mb-4" id="nextWish">&gt;</button>
-      </div>
+    <div class="d-flex justify-content-center flex-row">
+      <h2>Ізгі тілектер:</h2>
+    </div>
+    <div class="wishes mt-1">
       <div class="slides"></div>
+      <div class="arrows">
+        <button class="btn btn-sm rounded-5 btn-outline-success h-25" id="prevWish">&lt;</button>
+        <button class="btn btn-sm rounded-5 btn-outline-success h-25" id="nextWish">&gt;</button>
+      </div>
       <div class="dots"></div>
     </div>
   </main>
