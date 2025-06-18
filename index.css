@@ -1,0 +1,274 @@
+/* Глобальные стили */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'FuturaPT-400', sans-serif; /* основной шрифт */
+    color: #333;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Заголовки */
+h1, h2, h3 {
+    font-family: 'FuturaPT-400', sans-serif;
+    font-weight: 700;
+}
+
+/* Класс заголовка, как в оригинале */
+.kurmetti {
+    font-size: 2.5rem;           /* или 40px */
+    color: #20741D;              /* фирменный зелёный */
+    text-align: center;
+    margin-bottom: 0.5em;
+    line-height: 1.2;
+}
+
+/* Многострочный текст-приглашение */
+.shaktext {
+    font-size: 1.1rem;           /* около 18px */
+    color: #555;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    white-space: pre-line;       /* переносы по <br> будут работать */
+    line-height: 1.6;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+
+/* Hero: центрирование изображения */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em 0;
+    background: #fff;
+}
+.hero img {
+    max-width: 300px; /* Задаём нужную максимальную ширину */
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Блок под картинкой */
+.hero-text {
+    text-align: center;
+    padding: 2em 1em;
+}
+.hero-text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5em;
+    color: #20741D;
+}
+.hero-text p {
+    font-size: 1.1rem;
+    margin-bottom: 1em;
+    color: #555;
+}
+
+.btn-custom {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  background: #20741D;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 0.6em 1.2em;
+  font-size: 1rem;
+  text-decoration: none;       /* для <a> */
+  cursor: pointer;
+}
+
+/* «Обрамлённая» версия */
+.btn-custom-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  background: #fff;
+  color: #20741D;
+  border: 2px solid #20741D;
+  border-radius: 50px;
+  padding: 0.6em 1.2em;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Немного отступов между кнопками */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+
+.btn-play svg { width: 1em; height: 1em; fill: currentColor; }
+
+
+.card {
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    min-height: auto;
+    margin: auto;       /* центруем и даём вертикальные отступы */
+    overflow: visible;
+    height: auto;              /* пусть рассчитывается по соотношению */
+}
+.card-body {
+  /* резервируем высоту под псевдоэлемент: 
+    5rem ≈ 5×16px = 80px; подстройте при необходимости */
+  padding-bottom: 5rem;
+}
+.card-body h2 { margin-bottom:0.5em; }
+.card-body p { margin:0.5em 0; color:#555; }
+.card-body strong { color:#20741D; }
+.countdown {
+    display:flex;justify-content:center;gap:0.5em;margin:0.5em 0;
+}
+.countdown div {
+    width:60px;height:60px;border:2px solid #20741D;
+    border-radius:50%;display:flex;
+    flex-direction:column;justify-content:center;align-items:center;
+}
+.countdown span { color:#20741D;font-size:1.2em; }
+.countdown small { color:#20741D;font-size:0.7em; }
+.buttons { display:flex;justify-content:center;gap:0.5em;flex-wrap:wrap;margin-top:1em; }
+.map-btn { background:#20741D;color:#fff;border:none; }
+.audio-btn { background:#fff;color:#20741D;border:2px solid #20741D; }
+.map-btn:hover { background:#2a8e33; }
+.audio-btn:hover { background:#f0fff0; }
+
+/* Owners */
+.owners-section { text-align:center; margin:2em auto; }
+.owners-list {
+    display:flex;justify-content:center;gap:2em;flex-wrap:wrap;
+}
+.owner {
+    display:flex;flex-direction:column;align-items:center;
+}
+.owner-img {
+    width:150px;height:150px;border-radius:50%;
+    background:#eee;object-fit:cover;
+}
+.owner-name { margin-top:0.5em;font-size:1.1em; }
+.insta-btn {
+    display:inline-flex;align-items:center;gap:0.4em;
+    margin-top:0.3em;padding:0.4em 0.8em;
+    border:1px solid #e1306c;border-radius:6px;
+    color:#e1306c;background:#fff;
+}
+.insta-btn:hover { background:rgba(225,48,108,0.1); }
+.insta-btn svg { width:1em;height:1em;fill:currentColor; }
+.owners-note { color:#20741D; margin-top:1em; }
+
+/* RSVP form */
+form { max-width:400px;margin:2em auto;display:flex;flex-direction:column;gap:1em; }
+.radios label { display:flex;align-items:center;gap:0.5em; }
+input,textarea,button { padding:10px;font-size:1em;border:1px solid #20741D;border-radius:4px; }
+textarea { resize:vertical; }
+button { background:#20741D;color:#fff;border:none; }
+
+/* Wishes slider */
+.wishes {
+    max-width:400px;
+    margin:2em auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    text-align:center;
+}
+.wishes h2 {
+    margin-bottom:1em;
+    font-size: 1.75rem;
+    color: #20741D;
+}
+.wishes .slides {
+  position: relative;
+  min-height: 120px; /* резерв под содержимое */
+}
+.wishes .slides, .wishes.dots {
+    margin-top:1em;
+}
+.wishes .slide {
+    display:none;
+    padding: 0.5rem 1rem;
+    line-height: 1.4;
+    color: #333;
+    animation: fadeIn 0.4s ease;
+}
+.wishes .slide.active { display:block; }
+.wishes .dots {
+    display:flex;
+    justify-content:center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+.wishes .dot {
+    width:12px;
+    height:12px;
+    border:2px solid #20741D;
+    border-radius:50%;
+    cursor:pointer;
+    transition: 0.3s ease;
+}
+.wishes .dot.active { background:#20741D; }
+.wishes .arrows { display:flex;justify-content:center;gap:1em;margin-top:1em; }
+.wishes .arrows button {
+    background:none;
+    border:2px solid #20741D;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    transition: ease 0.3s, color 0.3s;
+}
+.wishes .arrows button:hover {
+  background: #20741D;
+  color: #fff;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 360px) {
+  .wishes { padding: 1rem; }
+  .wishes h2 { font-size: 1.5rem; }
+  .wishes .arrows { gap: 0.5rem; }
+  .wishes .arrows button { padding: 0.3rem 0.6rem; }
+}
+
+@media (max-width: 768px) {
+    .hero-text h1 { font-size: 2rem; }
+    .hero-text p  { font-size: 1rem; }
+    .card {
+    margin: 24px 0;
+    padding: 16px;
+    }
+    .card h2 {
+    font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-text h1 { font-size: 1.5rem; }
+    .hero-text p  { font-size: 0.9rem; }
+    .hero-text { padding: 1.5em 1em; }
+    .card {
+    padding: 12px;
+    }
+}
+
+@media (max-width: 360px) {
+  .card {
+    width: 95%;  /* чуть больше «флюида» */
+  }
+  .card-body {
+    padding-bottom: 4rem;
+    padding-top: 2rem;
+  }
+  .card-body::after {
+    width: 90%;
+    padding-bottom: 45%;
+  }
+}
