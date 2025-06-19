@@ -40,14 +40,15 @@ h1, h2, h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1em 0;
+    padding: 0;
     background: #fff;
 }
-.hero img {
-    max-width: 300px; /* Задаём нужную максимальную ширину */
+.hero-bg__img {
+    max-width: 380px; /* Задаём нужную максимальную ширину */
     width: 100%;
     height: auto;
     display: block;
+    overflow: visible;
 }
 
 /* Блок под картинкой */
@@ -103,8 +104,21 @@ h1, h2, h3 {
 }
 
 
-.btn-play svg { width: 1em; height: 1em; fill: currentColor; }
+.btn-play svg { width: 1.5em; height: 1.5em; margin-bottom: 2px; fill: currentColor; }
+#btnHero {
+  position: fixed;       /* фиксируем относительно окна браузера */
+  right: 1rem;           /* отступ от правого края */
+  bottom: 5rem;          /* отступ от нижнего края */
+  z-index: 9999;         /* чтобы кнопка была поверх всего */
+}
 
+/* При желании: сделать чуть больше отступ на мобильных */
+@media (max-width: 576px) {
+  #btnHero {
+    right: 0.5rem;
+    bottom: 2.5rem;
+  }
+}
 
 .card {
     text-align: center;
@@ -134,9 +148,42 @@ h1, h2, h3 {
 .countdown span { color:#20741D;font-size:1.2em; }
 .countdown small { color:#20741D;font-size:0.7em; }
 .buttons { display:flex;justify-content:center;gap:0.5em;flex-wrap:wrap;margin-top:1em; }
-.map-btn { background:#20741D;color:#fff;border:none; }
+.map-btn {
+  position: relative;
+  overflow: hidden;                /* обязательно */
+  display: inline-block;
+  padding: 0.75em 1.5em;
+  font-size: 1rem;
+  color: #fff;
+  border-radius: .5em;
+  background: linear-gradient(135deg, #3abf2d, #1e6b10);
+  box-shadow: 0 0 20px rgba(58,191,45,0.6), inset 0 2px 4px rgba(0,0,0,0.2);
+  transition:
+    transform 0.8s ease-in-out,
+    box-shadow 0.8s ease-in-out;
+}
+.map-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #1e6b10, #3abf2d);
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  pointer-events: none;
+  z-index: -1;
+}
+.map-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 30px rgba(58,191,45,0.8), inset 0 2px 4px rgba(0,0,0,0.2);
+}
+.map-btn:hover::before {
+  opacity: 1;        /* постепенно меняем градиент */
+}
+.map-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 0 10px rgba(58,191,45,0.4), inset 0 2px 6px rgba(0,0,0,0.3);
+}
 .audio-btn { background:#fff;color:#20741D;border:2px solid #20741D; }
-.map-btn:hover { background:#2a8e33; }
 .audio-btn:hover { background:#f0fff0; }
 
 /* Owners */
